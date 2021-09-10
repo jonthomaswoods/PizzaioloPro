@@ -15,7 +15,6 @@ namespace PizzaJo.ViewModels
     /// </summary>
     class ReminderViewModel : BaseViewModel
     {
-        public OSAppTheme currentTheme = Application.Current.RequestedTheme;
         public ICommand SetReminder { get; }
 
         /// <summary>
@@ -30,7 +29,7 @@ namespace PizzaJo.ViewModels
 
                 IntilizeTextColors();
 
-                MessagingCenter.Subscribe<AboutViewModel>(this, "DarkMode2", (sender) =>
+                MessagingCenter.Subscribe<AboutViewModel>(this, "DarkMode", (sender) =>
                 {
                     IntilizeTextColors();
                 });
@@ -87,15 +86,15 @@ namespace PizzaJo.ViewModels
         {
             try
             {
-                if (currentTheme == OSAppTheme.Dark)
+                if (Application.Current.RequestedTheme == OSAppTheme.Dark)
                 {
-                    ReminderColor = Color.White;
-                    ReminderSecondColor = Color.White;
+                    ReminderColor = Color.FromHex("#e2f1f8");
+                    ReminderSecondColor = Color.FromHex("#e2f1f8");
                 }
                 else
                 {
-                    ReminderColor = Color.Black;
-                    ReminderSecondColor = Color.Black;
+                    ReminderColor = Color.FromHex("#373737");
+                    ReminderSecondColor = Color.FromHex("#373737");
                 }
             }
             catch (Exception ex)
@@ -354,16 +353,6 @@ namespace PizzaJo.ViewModels
             }
         }
 
-        void ShowNotification(string title, string message)
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                var msg = new Label()
-                {
-                    Text = $"Notification Received:\nTitle: {title}\nMessage: {message}"
-                };
-            });
-        }
 
 
         private DoughNotificationsModel selectedNotification;
@@ -479,10 +468,10 @@ namespace PizzaJo.ViewModels
                 if (value == reminderTime)
                     return;
 
-                if (currentTheme == OSAppTheme.Dark)
-                    ReminderColor = Color.White;
+                if (Application.Current.RequestedTheme == OSAppTheme.Dark)
+                    ReminderColor = Color.FromHex("#e2f1f8");
                 else
-                    ReminderColor = Color.Black;
+                    ReminderColor = Color.FromHex("#373737");
 
                 reminderTime = value;
                 OnPropertyChanged();
@@ -497,10 +486,10 @@ namespace PizzaJo.ViewModels
             {
                 if (value == remindersecondTime)
                     return;
-                if (currentTheme == OSAppTheme.Dark)
-                    ReminderSecondColor = Color.White;
+                if (Application.Current.RequestedTheme == OSAppTheme.Dark)
+                    ReminderSecondColor = Color.FromHex("#e2f1f8");
                 else
-                    ReminderSecondColor = Color.Black;
+                    ReminderSecondColor = Color.FromHex("#373737");
 
                 remindersecondTime = value;
                 OnPropertyChanged();

@@ -15,7 +15,6 @@ namespace PizzaJo.ViewModels
     /// </summary>
     public class RecipeViewModel : BaseViewModel
     {
-        public OSAppTheme currentTheme = Application.Current.RequestedTheme;
         public ICommand CalcCommand { get; }
 
         /// <summary>
@@ -30,7 +29,7 @@ namespace PizzaJo.ViewModels
 
                 IntilizeTextColors();
 
-                MessagingCenter.Subscribe<AboutViewModel>(this, "DarkMode1", (sender) =>
+                MessagingCenter.Subscribe<AboutViewModel>(this, "DarkMode", (sender) =>
                 {
                     IntilizeTextColors();
                 });
@@ -48,17 +47,17 @@ namespace PizzaJo.ViewModels
         {
             try
             {
-                if (currentTheme == OSAppTheme.Dark)
+                if (Application.Current.RequestedTheme == OSAppTheme.Dark)
                 {
-                    HydrationColor = Color.White;
-                    DoughColor = Color.White;
-                    PizzasColor = Color.White;
+                    HydrationColor = Color.FromHex("#e2f1f8");
+                    DoughColor = Color.FromHex("#e2f1f8");
+                    PizzasColor = Color.FromHex("#e2f1f8");
                 }
                 else
                 {
-                    HydrationColor = Color.Black;
-                    DoughColor = Color.Black;
-                    PizzasColor = Color.Black;
+                    HydrationColor = Color.FromHex("#373737");
+                    DoughColor = Color.FromHex("#373737");
+                    PizzasColor = Color.FromHex("#373737");
                 }
             }
             catch (Exception ex)
@@ -120,10 +119,10 @@ namespace PizzaJo.ViewModels
                 if (value == hydration)
                     return;
                 hydration = value;
-                if (currentTheme == OSAppTheme.Dark)
-                    HydrationColor = Color.White;
+                if (Application.Current.RequestedTheme == OSAppTheme.Dark)
+                    HydrationColor = Color.FromHex("#e2f1f8");
                 else
-                    HydrationColor = Color.Black;
+                    HydrationColor = Color.FromHex("#373737");
 
                 OnPropertyChanged();
             }
@@ -138,10 +137,10 @@ namespace PizzaJo.ViewModels
                 if (value == dough)
                     return;
                 dough = value;
-                if (currentTheme == OSAppTheme.Dark)
-                    DoughColor = Color.White;
+                if (Application.Current.RequestedTheme == OSAppTheme.Dark)
+                    DoughColor = Color.FromHex("#e2f1f8");
                 else
-                    DoughColor = Color.Black;
+                    DoughColor = Color.FromHex("#373737");
                 OnPropertyChanged();
             }
         }
@@ -155,10 +154,10 @@ namespace PizzaJo.ViewModels
                 if (value == pizzas)
                     return;
                 pizzas = value;
-                if (currentTheme == OSAppTheme.Dark)
-                    PizzasColor = Color.White;
+                if (Application.Current.RequestedTheme == OSAppTheme.Dark)
+                    PizzasColor = Color.FromHex("#e2f1f8");
                 else
-                    PizzasColor = Color.Black;
+                    PizzasColor = Color.FromHex("#373737");
 
                 OnPropertyChanged();
             }

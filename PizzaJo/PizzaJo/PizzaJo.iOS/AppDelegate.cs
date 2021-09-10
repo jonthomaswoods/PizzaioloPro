@@ -5,6 +5,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using UserNotifications;
 
 namespace PizzaJo.iOS
 {
@@ -25,8 +26,22 @@ namespace PizzaJo.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            Plugin.LocalNotification.NotificationCenter.AskPermission();
+            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+            {
+                // Ask the user for permission to get notifications on iOS 10.0+
+                UNUserNotificationCenter.Current.RequestAuthorization(
+                        UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound,
+                        (approved, error) => { });
+            }
+            else if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+            {
+                // Ask the user for permission to get notifications on iOS 8.0+
+                var settings = UIUserNotificationSettings.GetSettingsForTypes(
+                        UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
+                        new NSSet());
 
+                UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+            }
             var dbName = "PizzaiolaPro.db3";
             string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "..", "Library");
             string completePath = Path.Combine(folderPath, dbName);
@@ -36,9 +51,5 @@ namespace PizzaJo.iOS
             return base.FinishedLaunching(app, options);
         }
 
-        public override void WillEnterForeground(UIApplication uiApplication)
-        {
-            Plugin.LocalNotification.NotificationCenter.ResetApplicationIconBadgeNumber(uiApplication);
-        }
     }
 }

@@ -7,16 +7,15 @@
     -->
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#EE3A43</Color>
+            <Color x:Key="Primary">#7f0000</Color>
 
             <!-- Light colors -->
-            <Color x:Key="LightPrimaryColor">WhiteSmoke</Color>
-            <Color x:Key="LightSecondaryColor">Black</Color>
+            <Color x:Key="LightPrimaryColor">#e2f1f8</Color>
+            <Color x:Key="LightSecondaryColor">#373737</Color>
 
             <!-- Dark colors -->
-            <Color x:Key="DarkPrimaryColor">Black</Color>
-            <Color x:Key="DarkSecondaryColor">White</Color>
-
+            <Color x:Key="DarkPrimaryColor">#373737</Color>
+            <Color x:Key="DarkSecondaryColor">#e2f1f8</Color>
 
             <Style TargetType="Entry">
                 <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}"></Setter>
@@ -50,7 +49,7 @@
             </Style>
 
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkSecondaryColor}"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">

@@ -151,28 +151,27 @@ namespace PizzaJo.ViewModels
             }
         }
 
-        private bool darkmode = false;
+        private bool darkmode;
         public bool DarkMode
         {
             get => darkmode;
             set
             {
+                darkmode = value;
+
                 if (DarkMode)
                 {
                     Application.Current.UserAppTheme = OSAppTheme.Dark;
                     Preferences.Set("darkmode", "true");
-                    MessagingCenter.Send(this, "DarkMode1");
-                    MessagingCenter.Send(this, "DarkMode2");
+                    MessagingCenter.Send(this, "DarkMode");
                 }
                 else
                 {
                     Application.Current.UserAppTheme = OSAppTheme.Light;
                     Preferences.Set("darkmode", "false");
-                    MessagingCenter.Send(this, "DarkMode1");
-                    MessagingCenter.Send(this, "DarkMode2");
+                    MessagingCenter.Send(this, "DarkMode");
                 }
 
-                darkmode = value;
                 OnPropertyChanged();
             }
         }
