@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PizzaJo.ViewModels" xmlns:m="clr-namespace:PizzaJo.Models" x:DataType="vm:PizzaMediaViewModel"
+             x:Class="PizzaJo.Views.PizzaMediaPage"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:PizzaMediaViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="about.png"
+                     Command="{Binding AboutNavCommand}"
+                     Order="Primary"
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
+
+
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <StackLayout IsVisible="{Binding InternetPage}">
+                    <Button Text="Select Photo To Upload" Command="{Binding SelectImage}" Margin="5"/>
+                    <Grid Margin="5" IsVisible="{Binding ImageShown}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding SelectedImageSource}"  Grid.Column="0"/>
+                        <Entry Text="{Binding PizzaDescription}" Placeholder="Pizza Description" MaxLength="100" Grid.Row="1"/>
+                        <Button Text="Upload" Command="{Binding UploadImage}"  Grid.Row="2" />
+                    </Grid>
+                    <ListView ItemsSource="{Binding PizzaItems,Mode=TwoWay}" SelectedItem="{Binding SelectedLike, Mode=TwoWay}" RowHeight="325" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshList}" IsRefreshing="{Binding IsRefreshing}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="m:PizzaMediaModel">
+                                <ViewCell>
+                                    <StackLayout>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding LikeCommand, Mode=TwoWay,Source={RelativeSource AncestorType={x:Type vm:PizzaMediaViewModel}}}" 
+                                                              CommandParameter="{Binding FireKey, Mode=TwoWay}"
+                                                              NumberOfTapsRequired="2"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <Grid HorizontalOptions="CenterAndExpand">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="76*"/>
+                                                <ColumnDefinition Width="12*"/>
+                                                <ColumnDefinition Width="12*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="{Binding PizzaImage}" Aspect="AspectFit" HeightRequest="275" Grid.Row="0" Grid.ColumnSpan="3"/>
+                                            <Label Text="{Binding Description}"  LineBreakMode="WordWrap" Grid.Row="1" FontSize="Medium" HeightRequest="45" Margin="10,0,0,0" Grid.Column="0"/>
+                                            <Label Text="Likes" FontSize="Medium" HeightRequest="25" Grid.Column="1" Grid.Row="1"/>
+                                            <Label Text="{Binding Likes}" FontSize="Medium" FontAttributes="Bold" HeightRequest="25" Grid.Column="2" Grid.Row="1"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Footer>
+                            <Button Text="Load More" Command="{Binding LoadMore}" Margin="5"/>
+                        </ListView.Footer>
+                    </ListView>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding NoInternetPage}">
+                    <Label Text="No Internet. Connect to internet to use this page." FontSize="Large"/>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding DisablePage}" IsEnabled="{Binding DisablePage}" 
+                             AbsoluteLayout.LayoutBounds="0,0,1,1"  AbsoluteLayout.LayoutFlags="All" 
+                             BackgroundColor="Gray" Opacity="0.5">
+                </StackLayout>
+            </Grid>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

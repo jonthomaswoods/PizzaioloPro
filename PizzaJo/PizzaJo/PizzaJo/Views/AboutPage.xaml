@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PizzaJo.ViewModels" x:DataType="vm:AboutViewModel"
+             x:Class="PizzaJo.Views.AboutPage"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
+
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <StackLayout Margin="5">
+                    <Label Text="Thanks for using Pizzaiolo Pro!"
+                           FontSize="Large"/>
+                    <Label Text="My name is Jon Woods and I developed this app because I LOVE pizza and coding. I hope this app helps others in their venture to become a Pizzaiolo!" FontSize="Medium"/>
+                    <BoxView HeightRequest="2"/>
+                    <Label Text="For any inquiries to develop an app click on the image below to visit Crux Resolutions website." FontSize="Medium"/>
+                    <ImageButton Source="cruxgold.png" BackgroundColor="White" BorderColor="Transparent" Command="{Binding CruxCommand}" Margin="15"/>
+                    <Label Text="Also please feel free to visit my personal website." FontSize="Medium"/>
+                    <Label Text="jonthomaswoods.com" HorizontalOptions="Center" FontSize="Large">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PersonalCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Grid>
+                        <Label Text="Would you like dark mode enabled?" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding DarkMode}" Grid.Column="1"/>
+                    </Grid>
+
+                    <BoxView HeightRequest="2"/>
+                    <Label Text="To report issue please fill out the form below." FontSize="Medium"/>
+                    <Entry Placeholder="Name"
+                           Text="{Binding Name}" MaxLength="40"/>
+                    <Entry Placeholder="Error Description" 
+                           Text="{Binding Message}" MaxLength="200"/>
+                    <Button Text="Submit" Command="{Binding SendEmailCommand}"/>
+
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding DisablePage}" IsEnabled="{Binding DisablePage}" 
+                             AbsoluteLayout.LayoutBounds="0,0,1,1"  AbsoluteLayout.LayoutFlags="All" 
+                             BackgroundColor="Gray" Opacity="0.5"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

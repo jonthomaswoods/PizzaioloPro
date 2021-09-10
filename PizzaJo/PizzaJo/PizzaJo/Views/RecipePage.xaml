@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PizzaJo.Views.RecipePage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:PizzaJo.ViewModels" x:DataType="vm:RecipeViewModel"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:RecipeViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="about.png"
+                     Command="{Binding AboutNavCommand}"
+                     Order="Primary"
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Frame Padding="5" HasShadow="True" CornerRadius="2">
+                    <xct:Expander BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
+                        <xct:Expander.Header>
+                            <Grid>
+                                <Label Text="Instructions" FontAttributes="Bold" FontSize="Large" Margin="10"/>
+                                <Image Source="{AppThemeBinding Light=expand.png, Dark=expand_dark.png}" HorizontalOptions="End" VerticalOptions="Start" Margin="10">
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}" Value="True">
+                                            <Setter Property="Source" Value="{AppThemeBinding Light=unexpand.png, Dark=unexpand_dark.png}" />
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                            </Grid>
+                        </xct:Expander.Header>
+                        <ScrollView>
+                            <StackLayout>
+
+                                <Label FontSize="Body">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="The hydration calculator is used to find the amount of flour and water needed for a specific hydration, and gives the amount needed for a specified number of desired pizzas. To use the hydration calculator the " />
+                                            <Span Text="dough size, hydration percentage, and number of pizzas is required." FontAttributes="Bold" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label FontSize="Body">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="The " />
+                                            <Span Text="dough size " FontAttributes="Bold" />
+                                            <Span Text="is the final product of your dough. This is the beautiful glossy ball that will be formed into a pizza. A 10in pizza is going to be roughly 200-220 grams for reference." />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label FontSize="Body">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="The " />
+                                            <Span Text="hydration percentage" FontAttributes="Bold" />
+                                            <Span Text="is the ratio of water to flour in your dough. The higher the hydration in your pizza the faster it will rise, and the gluten will soften which will cause the pizza to form larger air pockets. Be careful though too much hydration and the dough will be too sticky to work with! 60-70% is a good range to test out." />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="The " />
+                                            <Span Text="number of pizzas " FontAttributes="Bold" />
+                                            <Span Text="is the final amount of dough balls desired. This simply means you can use this calculator to modify a recipe for however many pizzas are required for your pizza party!" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Text="If you are adding sugar or other ingredents just add the amount to the salt entry."/>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                    </xct:Expander>
+                </Frame>
+
+                <Entry Keyboard="Numeric" Placeholder="Dough Size (g)" Text="{Binding DoughText, Mode=TwoWay}" TextColor="{Binding DoughColor}" PlaceholderColor="{Binding DoughColor}"/>
+                <Entry Keyboard="Numeric" Placeholder="# of Pizza's" Text="{Binding PizzasText}" TextColor="{Binding PizzasColor}" PlaceholderColor="{Binding PizzasColor}"/>
+
+                <Entry Keyboard="Numeric" MaxLength="3"  Placeholder="Hydration %" Text="{Binding HydrationText}" TextColor="{Binding HydrationColor}" PlaceholderColor="{Binding HydrationColor}"/>
+                <Entry Keyboard="Numeric" Placeholder="Yeast (g) Optional" Text="{Binding Yeast}"/>
+                <Entry Keyboard="Numeric" Placeholder="Salt or Misc (g) Optional" Text="{Binding Salt}"/>
+                <Button Text="Calculate" Command="{Binding CalcCommand}"/>
+                <Frame>
+                    <StackLayout>
+                        <Label Text="{Binding Measurements}" FontSize="Large" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Flour}" FontSize="Large" HorizontalOptions="CenterAndExpand"  Margin="10"/>
+                        <Label Text="{Binding Water}" FontSize="Large" HorizontalOptions="CenterAndExpand" Margin="10"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

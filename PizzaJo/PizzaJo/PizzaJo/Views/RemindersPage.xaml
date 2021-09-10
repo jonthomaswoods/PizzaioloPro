@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PizzaJo.ViewModels" x:DataType="vm:ReminderViewModel"
+             xmlns:m="clr-namespace:PizzaJo.Models" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="PizzaJo.Views.RemindersPage"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:ReminderViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="about.png"
+                     Command="{Binding AboutNavCommand}"
+                     Order="Primary"
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
+
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Frame Padding="5" HasShadow="True" CornerRadius="2">
+                    <xct:Expander BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
+                        <xct:Expander.Header>
+                            <Grid>
+                                <Label Text="Fermentation Instructions" FontAttributes="Bold" FontSize="Large"  Margin="10"/>
+                                <Image Source="{AppThemeBinding Light=expand.png, Dark=expand_dark.png}" HorizontalOptions="End" VerticalOptions="Start" Margin="10">
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}" Value="True">
+                                            <Setter Property="Source" Value="{AppThemeBinding Light=unexpand.png, Dark=unexpand_dark.png}" />
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                            </Grid>
+                        </xct:Expander.Header>
+                        <ScrollView>
+                            <StackLayout>
+
+                                <Label Text="The fermentation reminders are used to help you get the most out of your pizza dough using fermentation. There are 3 different reminders you can set: Initial, Second, and Final. None of these steps are required to make pizza, but they truly help!" FontSize="Body"/>
+
+                                <Label FontSize="Body">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="1. The " />
+                                            <Span Text="Initial Reminder " FontAttributes="Bold" />
+                                            <Span Text="is used for your first fermentation step. This step starts right after the dough has been mixed and kneaded (not yet individual balls). Put the dough in a bowl and cover. Then at room temperature (~72F degrees or 22C) let the dough ferment for 8 hours up to 24 hours."/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label FontSize="Body">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="2. " />
+                                            <Span Text="Second Reminder " FontAttributes="Bold" />
+                                            <Span Text="is used once the initial fermentation is finished. This step is once the dough is formed into dough balls. Although this step is optional the second fermentation allows the gluten to relax which causes the pizza to be fluffier and easier to form. One option for this step is to ferment at room temperature (roughly 72F degrees or 22C) for 8 hours up to 12 hours. The second option is to cold ferment in the refrigerator for 24 hours up to 5 days." />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label FontSize="Body">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="3. " />
+                                            <Span Text="Final Reminder " FontAttributes="Bold" />
+                                            <Span Text="is pizza time! This reminder can be used in two ways. One can be once the pizza is ready to be made. The second use is when to take the dough out of the refrigerator if using a cold fermentation on the second step. It is recommended to take the dough our at least 1 hour before going in the oven." />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label Text="Now go enjoy some pizza!" FontSize="Large" HorizontalOptions="Center"/>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                    </xct:Expander>
+                </Frame>
+
+                <Label Text="Select Fermentation Steps" HorizontalOptions="Center" FontSize="Medium"/>
+                <Grid Margin="20,0,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Initial" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End" FontSize="Medium" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding InitialStack}"/>
+                    <Label Text="Second" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="End" FontSize="Medium"/>
+                    <CheckBox Grid.Column="4" IsChecked="{Binding SecondStack}"/>
+                    <Label Text="Finished" Grid.Column="5" VerticalOptions="Center" HorizontalOptions="End" FontSize="Medium"/>
+                    <CheckBox Grid.Column="6" IsChecked="{Binding FinishedStack}"/>
+                </Grid>
+
+                <StackLayout IsVisible="{Binding InitialStack}" Margin="0,0,0,5">
+                    <Label Text="Select Initial Fermentation Time" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+                    <Label Text="Select the beginning date/time of the process then how many hours you would like ferment." Margin="5"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker Date="{Binding StartDate}" Grid.Column="0" />
+                        <TimePicker Time="{Binding StartTime}" Grid.Column="1" />
+                    </Grid>
+                    <Entry Keyboard="Numeric" Placeholder="Elapsed Time (hrs)" PlaceholderColor="{Binding ReminderColor}" Text="{Binding ReminderTime}" TextColor="{Binding ReminderColor, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding SecondStack}" Margin="0,0,0,5">
+                    <Label Text="Select Second Fermentation Time" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+                    <Label Text="Select the beginning date/time of the process then how many hours you would like ferment." Margin="5"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker Date="{Binding SecondStartDate}" Grid.Column="0" />
+                        <TimePicker Time="{Binding SecondStartTime}" Grid.Column="1" />
+                    </Grid>
+                    <Entry Keyboard="Numeric" Placeholder="Elapsed Time (hrs)" PlaceholderColor="{Binding ReminderSecondColor}" Text="{Binding ReminderSecondTime}" TextColor="{Binding ReminderSecondColor, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding FinishedStack}" Margin="0,0,0,5">
+                    <Label Text="Select The Time Pizza Is Ready To Be Made" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker Date="{Binding FinishedStartDate}" Grid.Column="0" />
+                        <TimePicker Time="{Binding FinishedStartTime}" Grid.Column="1" />
+                    </Grid>
+                </StackLayout>
+                
+                <Button Text="Set Reminders" Command="{Binding SetReminder}" Margin="5"/>
+
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Current Reminders" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+                    <ListView BackgroundColor="Transparent" ItemsSource="{Binding DoughNotifications}" HeightRequest="300" SelectedItem="{Binding SelectedNotification}" HasUnevenRows="True"  HorizontalOptions="CenterAndExpand">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="m:DoughNotificationsModel">
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding NotificationType, Mode=TwoWay}" HorizontalOptions="Start" HorizontalTextAlignment="Start" FontSize="Medium" Padding="10" FontAttributes="None"/>
+                                        <Label Text="{Binding NotificationDate, Mode=TwoWay}" HorizontalOptions="End" HorizontalTextAlignment="End" FontSize="Medium" Padding="10" FontAttributes="None"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
