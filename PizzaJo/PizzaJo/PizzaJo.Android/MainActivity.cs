@@ -4,7 +4,7 @@ using Android.Runtime;
 using Android.OS;
 using Android.Content;
 using System.IO;
-using Plugin.LocalNotifications;
+using Plugin.LocalNotification;
 
 namespace PizzaJo.Droid
 {
@@ -13,7 +13,7 @@ namespace PizzaJo.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.pizzaicon;
+            NotificationCenter.CreateNotificationChannel();
 
             base.SetTheme(Resource.Style.MainTheme);
             base.OnCreate(savedInstanceState);
@@ -27,6 +27,8 @@ namespace PizzaJo.Droid
 
             LoadApplication(new App(completePath));
 
+            NotificationCenter.NotifyNotificationTapped(Intent);
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -37,6 +39,7 @@ namespace PizzaJo.Droid
 
         protected override void OnNewIntent(Intent intent)
         {
+            NotificationCenter.NotifyNotificationTapped(intent);
             base.OnNewIntent(intent);
         }
 

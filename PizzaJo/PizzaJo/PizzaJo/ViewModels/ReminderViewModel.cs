@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using SQLite;
 using PizzaJo.Models;
+using Plugin.LocalNotification;
 using Plugin.LocalNotifications;
 
 namespace PizzaJo.ViewModels
@@ -124,22 +125,27 @@ namespace PizzaJo.ViewModels
 
                                 if (StartDate > DateTime.Now)
                                 {
-                                    //var notification = new NotificationRequest
-                                    //{
-                                    //    NotificationId = 100,
-                                    //    Title = "Dough Reminder!",
-                                    //    Description = "Your doughs first fermentation is done. Let's make some dough balls!",
-                                    //    ReturningData = "",
-                                    //    Android = { IconSmallName = { ResourceName = "pizza" }, IconLargeName = { ResourceName = "icon" } },
-                                    //    Schedule = { NotifyTime = StartDate.AddHours((int)ReminderTime) }
-                                    //};
-                                    //await NotificationCenter.Current.Show(notification);
-
                                     int notGUID = BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0);
 
-                                    string nottitle = "Dough Reminder!";
-                                    string notmessage = "Your doughs first fermentation is done. Let's make some dough balls!";
-                                    CrossLocalNotifications.Current.Show(nottitle, notmessage, notGUID, StartDate.AddHours((int)ReminderTime));
+                                    if (Device.RuntimePlatform == Device.iOS)
+                                    {
+                                        string nottitle = "Dough Reminder!";
+                                        string notmessage = "Your doughs first fermentation is done. Let's make some dough balls!";
+                                        CrossLocalNotifications.Current.Show(nottitle, notmessage, notGUID, StartDate.AddHours((int)ReminderTime));
+                                    }
+                                    else if (Device.RuntimePlatform == Device.Android)
+                                    {
+                                        var notification = new NotificationRequest
+                                        {
+                                            NotificationId = notGUID,
+                                            Title = "Dough Reminder!",
+                                            Description = "Your doughs first fermentation is done. Let's make some dough balls!",
+                                            ReturningData = "",
+                                            Android = { IconSmallName = { ResourceName = "pizza" }, IconLargeName = { ResourceName = "icon" } },
+                                            Schedule = { NotifyTime = StartDate.AddHours((int)ReminderTime) }
+                                        };
+                                        await NotificationCenter.Current.Show(notification);
+                                    }
 
                                     var notificationmodel = new DoughNotificationsModel();
                                     notificationmodel.NotificationType = "Initial Fermentation";
@@ -184,23 +190,27 @@ namespace PizzaJo.ViewModels
                             {
                                 if (!InitialStack || (InitialStack && SecondStartDate >= StartDate))
                                 {
-
-                                    //var notification = new NotificationRequest
-                                    //{
-                                    //    NotificationId = 100,
-                                    //    Title = "Dough Reminder!",
-                                    //    Description = "Your doughs second fermentation is done. Pizza time is close!",
-                                    //    ReturningData = "",
-                                    //    Android = { IconSmallName = { ResourceName = "pizza" }, IconLargeName = { ResourceName = "icon" } },
-                                    //    Schedule = { NotifyTime = SecondStartDate }
-                                    //};
-                                    //await NotificationCenter.Current.Show(notification);
-
                                     int notGUID = BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0);
 
-                                    string nottitle = "Dough Reminder!";
-                                    string notmessage = "Your doughs second fermentation is done. Pizza time is close!";
-                                    CrossLocalNotifications.Current.Show(nottitle, notmessage, notGUID, SecondStartDate);
+                                    if (Device.RuntimePlatform == Device.iOS)
+                                    {
+                                        string nottitle = "Dough Reminder!";
+                                        string notmessage = "Your doughs second fermentation is done. Pizza time is close!";
+                                        CrossLocalNotifications.Current.Show(nottitle, notmessage, notGUID, SecondStartDate);
+                                    }
+                                    else if (Device.RuntimePlatform == Device.Android)
+                                    {
+                                        var notification = new NotificationRequest
+                                        {
+                                            NotificationId = notGUID,
+                                            Title = "Dough Reminder!",
+                                            Description = "Your doughs second fermentation is done. Pizza time is close!",
+                                            ReturningData = "",
+                                            Android = { IconSmallName = { ResourceName = "pizza" }, IconLargeName = { ResourceName = "icon" } },
+                                            Schedule = { NotifyTime = SecondStartDate }
+                                        };
+                                        await NotificationCenter.Current.Show(notification);
+                                    }
 
                                     var secondnotificationmodel = new DoughNotificationsModel();
                                     secondnotificationmodel.NotificationType = "Second Fermentation";
@@ -249,18 +259,25 @@ namespace PizzaJo.ViewModels
                                 if (!SecondStack || (SecondStack && FinishedStartDate >= SecondStartDate))
                                 {
                                     int notGUID = BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0);
-                                    //var notification = new NotificationRequest
-                                    //{
-                                    //    NotificationId = notGUID,
-                                    //    Title = "Pizza Time!",
-                                    //    Description = "Your are ready to make some pizza!",
-                                    //    Android = { IconSmallName = { ResourceName = "pizza"}, IconLargeName = { ResourceName = "icon"}},
-                                    //    Schedule = { NotifyTime = FinishedStartDate }
-                                    //};
-                                    //var res = await NotificationCenter.Current.Show(notification);
-                                    string nottitle = "Final Fermentation";
-                                    string notmessage = "Your are ready to make some pizza!";
-                                    CrossLocalNotifications.Current.Show(nottitle, notmessage, notGUID, FinishedStartDate);
+
+                                    if (Device.RuntimePlatform == Device.iOS)
+                                    {
+                                        string nottitle = "Pizza Time!";
+                                        string notmessage = "Your are ready to make some pizza!";
+                                        CrossLocalNotifications.Current.Show(nottitle, notmessage, notGUID, FinishedStartDate);
+                                    }
+                                    else if (Device.RuntimePlatform == Device.Android)
+                                    {
+                                        var notification = new NotificationRequest
+                                        {
+                                            NotificationId = notGUID,
+                                            Title = "Pizza Time!",
+                                            Description = "Your are ready to make some pizza!",
+                                            Android = { IconSmallName = { ResourceName = "pizza" }, IconLargeName = { ResourceName = "icon" } },
+                                            Schedule = { NotifyTime = FinishedStartDate }
+                                        };
+                                        var res = await NotificationCenter.Current.Show(notification);
+                                    }
 
                                     var finalnotificationmodel = new DoughNotificationsModel();
                                     finalnotificationmodel.NotificationGuid = notGUID;
