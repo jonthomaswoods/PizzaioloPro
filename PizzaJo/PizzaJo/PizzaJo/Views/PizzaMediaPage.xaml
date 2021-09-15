@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PizzaJo.ViewModels" xmlns:m="clr-namespace:PizzaJo.Models" x:DataType="vm:PizzaMediaViewModel"
              x:Class="PizzaJo.Views.PizzaMediaPage"
-             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
-             Title="{Binding Title}">
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
 
     <ContentPage.BindingContext>
         <vm:PizzaMediaViewModel/>
@@ -17,13 +16,11 @@
                      Priority="0" />
     </ContentPage.ToolbarItems>
 
-
-
     <ContentPage.Content>
         <ScrollView>
             <Grid>
                 <StackLayout IsVisible="{Binding InternetPage}">
-                    <Button Text="Select Photo To Upload" Command="{Binding SelectImage}" Margin="5"/>
+                    <Button Text="Select Photo To Upload" FontFamily="Oregano-Regular" Command="{Binding SelectImage}" Margin="5"/>
                     <Grid Margin="5" IsVisible="{Binding ImageShown}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -55,9 +52,9 @@
                                                 <ColumnDefinition Width="12*"/>
                                             </Grid.ColumnDefinitions>
                                             <Image Source="{Binding PizzaImage}" Aspect="AspectFit" HeightRequest="275" Grid.Row="0" Grid.ColumnSpan="3"/>
-                                            <Label Text="{Binding Description}"  LineBreakMode="WordWrap" Grid.Row="1" FontSize="Medium" HeightRequest="45" Margin="10,0,0,0" Grid.Column="0"/>
-                                            <Label Text="Likes" FontSize="Medium" HeightRequest="25" Grid.Column="1" Grid.Row="1"/>
-                                            <Label Text="{Binding Likes}" FontSize="Medium" FontAttributes="Bold" HeightRequest="25" Grid.Column="2" Grid.Row="1"/>
+                                            <Label Text="{Binding Description}" FontFamily="Oregano-Regular"  LineBreakMode="WordWrap" Grid.Row="1" FontSize="Medium" HeightRequest="45" Margin="10,0,0,0" Grid.Column="0"/>
+                                            <Label Text="Likes" FontFamily="Oregano-Regular" FontSize="Medium" HeightRequest="25" Grid.Column="1" Grid.Row="1"/>
+                                            <Label Text="{Binding Likes}" FontFamily="Oregano-Regular" FontSize="Medium" FontAttributes="Bold" HeightRequest="25" Grid.Column="2" Grid.Row="1"/>
                                         </Grid>
                                     </StackLayout>
                                 </ViewCell>

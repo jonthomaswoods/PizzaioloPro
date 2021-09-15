@@ -5,8 +5,7 @@
              xmlns:m="clr-namespace:PizzaJo.Models" 
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="PizzaJo.Views.RemindersPage"
-             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
-             Title="{Binding Title}">
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
 
     <ContentPage.BindingContext>
         <vm:ReminderViewModel/>
@@ -27,7 +26,7 @@
                     <xct:Expander BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
                         <xct:Expander.Header>
                             <Grid>
-                                <Label Text="Fermentation Instructions" FontAttributes="Bold" FontSize="Large"  Margin="10"/>
+                                <Label Text="Fermentation Instructions" FontFamily="Oregano-Regular" FontAttributes="Bold" FontSize="Large"  Margin="10"/>
                                 <Image Source="{AppThemeBinding Light=expand.png, Dark=expand_dark.png}" HorizontalOptions="End" VerticalOptions="Start" Margin="10">
                                     <Image.Triggers>
                                         <DataTrigger TargetType="Image" Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}" Value="True">
@@ -72,7 +71,7 @@
                                     </Label.FormattedText>
                                 </Label>
 
-                                <Label Text="Now go enjoy some pizza!" FontSize="Large" HorizontalOptions="Center"/>
+                                <Label Text="Now go enjoy some pizza!" FontFamily="Oregano-Regular" FontSize="Large" HorizontalOptions="Center"/>
 
                             </StackLayout>
                         </ScrollView>
@@ -80,7 +79,7 @@
                     </xct:Expander>
                 </Frame>
 
-                <Label Text="Select Fermentation Steps" HorizontalOptions="Center" FontSize="Medium"/>
+                <Label Text="Select Fermentation Steps" FontFamily="Oregano-Regular" HorizontalOptions="Center" FontSize="Medium"/>
                 <Grid Margin="20,0,0,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -99,7 +98,7 @@
                 </Grid>
 
                 <StackLayout IsVisible="{Binding InitialStack}" Margin="0,0,0,5">
-                    <Label Text="Select Initial Fermentation Time" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+                    <Label Text="Select Initial Fermentation Time" FontFamily="Oregano-Regular" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
                     <Label Text="Select the beginning date/time of the process then how many hours you would like ferment." Margin="5"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -113,7 +112,7 @@
                 </StackLayout>
 
                 <StackLayout IsVisible="{Binding SecondStack}" Margin="0,0,0,5">
-                    <Label Text="Select Second Fermentation Time" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+                    <Label Text="Select Second Fermentation Time" FontFamily="Oregano-Regular" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
                     <Label Text="Select the beginning date/time of the process then how many hours you would like ferment." Margin="5"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -127,7 +126,7 @@
                 </StackLayout>
 
                 <StackLayout IsVisible="{Binding FinishedStack}" Margin="0,0,0,5">
-                    <Label Text="Select The Time Pizza Is Ready To Be Made" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+                    <Label Text="Select The Time Pizza Is Ready To Be Made" FontFamily="Oregano-Regular" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -141,14 +140,14 @@
                 <Button Text="Set Reminders" Command="{Binding SetReminder}" Margin="5"/>
 
                 <StackLayout Orientation="Vertical">
-                    <Label Text="Current Reminders" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+                    <Label Text="Current Reminders" FontFamily="Oregano-Regular" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
                     <ListView BackgroundColor="Transparent" ItemsSource="{Binding DoughNotifications}" HeightRequest="300" SelectedItem="{Binding SelectedNotification}" HasUnevenRows="True"  HorizontalOptions="CenterAndExpand">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:DoughNotificationsModel">
                                 <ViewCell>
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding NotificationType, Mode=TwoWay}" HorizontalOptions="Start" HorizontalTextAlignment="Start" FontSize="Medium" Padding="10" FontAttributes="None"/>
-                                        <Label Text="{Binding NotificationDate, Mode=TwoWay}" HorizontalOptions="End" HorizontalTextAlignment="End" FontSize="Medium" Padding="10" FontAttributes="None"/>
+                                        <Label Text="{Binding NotificationType, Mode=TwoWay}" FontFamily="Oregano-Regular" HorizontalOptions="Start" HorizontalTextAlignment="Start" FontSize="Medium" Padding="10" FontAttributes="None"/>
+                                        <Label Text="{Binding NotificationDate, Mode=TwoWay}" FontFamily="Oregano-Regular" HorizontalOptions="End" HorizontalTextAlignment="End" FontSize="Medium" Padding="10" FontAttributes="None"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

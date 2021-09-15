@@ -21,6 +21,7 @@
                 <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}"></Setter>
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}"></Setter>
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"></Setter>
+                <Setter Property="FontFamily" Value="Oregano-Regular"></Setter>
             </Style>
 
             <Style TargetType="Label">
@@ -34,11 +35,13 @@
             <Style TargetType="DatePicker">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}"/>
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"/>
+                <Setter Property="FontFamily" Value="Oregano-Regular"></Setter>
             </Style>
 
             <Style TargetType="TimePicker">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}"/>
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"/>
+                <Setter Property="FontFamily" Value="Oregano-Regular"></Setter>
             </Style>
 
             <Style TargetType="Frame">
@@ -50,6 +53,9 @@
 
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="{StaticResource DarkSecondaryColor}"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="Margin" Value="5"></Setter>
+                <Setter Property="FontFamily" Value="Oregano-Regular"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">

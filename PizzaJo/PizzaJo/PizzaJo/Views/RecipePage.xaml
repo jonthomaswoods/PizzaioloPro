@@ -4,8 +4,7 @@
              x:Class="PizzaJo.Views.RecipePage"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:vm="clr-namespace:PizzaJo.ViewModels" x:DataType="vm:RecipeViewModel"
-             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"
-             Title="{Binding Title}">
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
 
     <ContentPage.BindingContext>
         <vm:RecipeViewModel/>
@@ -25,7 +24,7 @@
                     <xct:Expander BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}">
                         <xct:Expander.Header>
                             <Grid>
-                                <Label Text="Instructions" FontAttributes="Bold" FontSize="Large" Margin="10"/>
+                                <Label Text="Calculator Instructions" FontFamily="Oregano-Regular" FontAttributes="Bold" FontSize="Large" Margin="10"/>
                                 <Image Source="{AppThemeBinding Light=expand.png, Dark=expand_dark.png}" HorizontalOptions="End" VerticalOptions="Start" Margin="10">
                                     <Image.Triggers>
                                         <DataTrigger TargetType="Image" Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}" Value="True">
@@ -93,9 +92,9 @@
                 <Button Text="Calculate" Command="{Binding CalcCommand}"/>
                 <Frame>
                     <StackLayout>
-                        <Label Text="{Binding Measurements}" FontSize="Large" HorizontalOptions="Center"/>
-                        <Label Text="{Binding Flour}" FontSize="Large" HorizontalOptions="CenterAndExpand"  Margin="10"/>
-                        <Label Text="{Binding Water}" FontSize="Large" HorizontalOptions="CenterAndExpand" Margin="10"/>
+                        <Label Text="{Binding Measurements}" FontFamily="Oregano-Regular" FontSize="Large" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Flour}" FontFamily="Oregano-Regular" FontSize="Large" HorizontalOptions="CenterAndExpand"  Margin="10"/>
+                        <Label Text="{Binding Water}" FontFamily="Oregano-Regular" FontSize="Large" HorizontalOptions="CenterAndExpand" Margin="10"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>

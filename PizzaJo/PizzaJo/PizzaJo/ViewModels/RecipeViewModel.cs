@@ -24,7 +24,6 @@ namespace PizzaJo.ViewModels
         {
             try
             {
-                Title = "Hydration Calculator";
                 CalcCommand = new Command(Calc);
 
                 IntilizeTextColors();

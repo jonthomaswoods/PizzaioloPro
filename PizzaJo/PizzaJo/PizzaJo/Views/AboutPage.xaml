@@ -13,14 +13,13 @@
         <ScrollView>
             <Grid>
                 <StackLayout Margin="5">
-                    <Label Text="Thanks for using Pizzaiolo Pro!"
-                           FontSize="Large"/>
+                    <Label Text="Thanks for using Pizzaiolo Pro!" FontSize="Large" FontFamily="Oregano-Regular"/>
                     <Label Text="My name is Jon Woods and I developed this app because I LOVE pizza and coding. I hope this app helps others in their venture to become a Pizzaiolo!" FontSize="Medium"/>
                     <BoxView HeightRequest="2"/>
                     <Label Text="For any inquiries to develop an app click on the image below to visit Crux Resolutions website." FontSize="Medium"/>
                     <ImageButton Source="cruxgold.png" BackgroundColor="White" BorderColor="Transparent" Command="{Binding CruxCommand}" Margin="15"/>
                     <Label Text="Also please feel free to visit my personal website." FontSize="Medium"/>
-                    <Label Text="jonthomaswoods.com" HorizontalOptions="Center" FontSize="Large">
+                    <Label Text="jonthomaswoods.com" FontFamily="Oregano-Regular" HorizontalOptions="Center" FontSize="Large">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding PersonalCommand}"/>
                         </Label.GestureRecognizers>

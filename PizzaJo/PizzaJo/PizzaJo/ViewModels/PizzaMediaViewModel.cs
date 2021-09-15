@@ -48,7 +48,6 @@ namespace PizzaJo.ViewModels
 
                 if (current == NetworkAccess.Internet)
                 {
-                    Title = "Pizza Share";
                     NoInternetPage = false;
                     InternetPage = true;
                     RefreshList = new Command(PerformRefresh);

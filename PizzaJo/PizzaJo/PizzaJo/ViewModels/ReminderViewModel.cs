@@ -25,7 +25,6 @@ namespace PizzaJo.ViewModels
         {
             try
             {
-                Title = "Fermentation Reminders";
                 SetReminder = new Command(ExecuteReminder);
 
                 IntilizeTextColors();
@@ -340,8 +339,15 @@ namespace PizzaJo.ViewModels
                                 NoReminders();
                         }
 
-                        CrossLocalNotifications.Current.Cancel(notificationsModel.NotificationGuid);
-                        //NotificationCenter.Current.Cancel(notificationsModel.NotificationGuid);
+
+                        if (Device.RuntimePlatform == Device.iOS)
+                        {
+                            CrossLocalNotifications.Current.Cancel(notificationsModel.NotificationGuid);
+                        }
+                        else if (Device.RuntimePlatform == Device.Android)
+                        {
+                            NotificationCenter.Current.Cancel(notificationsModel.NotificationGuid);
+                        }
                     }
                 }
             }
