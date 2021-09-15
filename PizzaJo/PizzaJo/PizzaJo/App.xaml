@@ -51,6 +51,10 @@
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}"></Setter>
             </Style>
 
+            <Style TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}"></Setter>
+            </Style>
+
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="{StaticResource DarkSecondaryColor}"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>

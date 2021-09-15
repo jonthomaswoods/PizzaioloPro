@@ -31,7 +31,7 @@
                         <Entry Text="{Binding PizzaDescription}" Placeholder="Pizza Description" MaxLength="100" Grid.Row="1"/>
                         <Button Text="Upload" Command="{Binding UploadImage}"  Grid.Row="2" />
                     </Grid>
-                    <ListView ItemsSource="{Binding PizzaItems,Mode=TwoWay}" BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" SelectedItem="{Binding SelectedLike, Mode=TwoWay}" RowHeight="325" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshList}" IsRefreshing="{Binding IsRefreshing}">
+                    <ListView ItemsSource="{Binding PizzaItems,Mode=TwoWay}" SelectedItem="{Binding SelectedLike, Mode=TwoWay}" RowHeight="325" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshList}" IsRefreshing="{Binding IsRefreshing}">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:PizzaMediaModel">
                                 <ViewCell>
